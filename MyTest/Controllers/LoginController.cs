@@ -22,7 +22,7 @@ namespace MyTest.Controllers
 
         public ActionResult Login()
         {
-            return View();
+            return View(); 
         }
         /// <summary>
         /// 登录
