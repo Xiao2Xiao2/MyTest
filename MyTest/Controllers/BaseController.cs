@@ -15,7 +15,7 @@ namespace MyTest.Controllers
         public Sys_UserAccount LoginUser
         {
             get
-            {
+            { 
                 return _loginuser;
             }
         }
