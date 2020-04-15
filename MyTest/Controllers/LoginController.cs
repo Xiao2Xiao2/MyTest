@@ -58,9 +58,19 @@ namespace MyTest.Controllers
                 json.Result = true;
                 try
                 {
-                    UserPermisstionsOperate bllup = new UserPermisstionsOperate(SystemUser.GUID);
+                    UserPermisstionsOperate userPermisstionsOperate  = new UserPermisstionsOperate(SystemUser.GUID);
 
-                    bllup.StoragePermissions();
+                    userPermisstionsOperate.StoragePermissions();
+                    if (SystemUser.IsAdmin!=1)
+                    {
+                        //判断是否有权限
+                        if (userPermisstionsOperate.HasRightList().Count == 0)
+                        {
+                            json.Message = "此账号未分配权限！请与管理员联系!";
+                            json.Code = 1;
+                            json.Result = false;
+                        }
+                    }
                 }
                 catch (Exception)
                 {

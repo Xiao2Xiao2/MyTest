@@ -9,14 +9,22 @@ using Model;
 using DHelper.Dapper;
 namespace MyTest.Extensions
 {
+    /// <summary>
+    /// 权限缓存与获取
+    /// </summary>
     public class UserPermisstionsOperate
     {
+        /// <summary>
+        /// 用户ID
+        /// </summary>
         private string GUID;
         public UserPermisstionsOperate(string userid)
         {
             GUID = userid;
         }
-
+        /// <summary>
+        /// 是否管理员
+        /// </summary>
         public Sys_UserAccount GetAdmin
         {
             get
@@ -26,7 +34,9 @@ namespace MyTest.Extensions
                 return admin;
             }
         }
-
+        /// <summary>
+        /// 缓存权限
+        /// </summary>
         public void StoragePermissions()
         {
             #region 用户缓存
@@ -107,13 +117,26 @@ namespace MyTest.Extensions
            
         }
 
-
+        /// <summary>
+        /// 查询权限
+        /// </summary>
+        /// <param name="rightCode">权限点代码</param>
+        /// <returns></returns>
         public bool HasRightCode(string rightCode)
         {
             if (GetAdmin.IsAdmin == 1) return true;
             List<Sys_Right> listRights = Cache.ReadCache(GUID.ToString() + "-Rights") as List<Sys_Right>;
             if (listRights == null || listRights.Count == 0) return false;
             return listRights.Exists(x => x.RiCode == rightCode);
+        }
+        /// <summary>
+        /// 获取权限List
+        /// </summary>
+        /// <returns></returns>
+        public List<Sys_Right> HasRightList()
+        {
+            List<Sys_Right> listRights = Cache.ReadCache(GUID.ToString() + "-Rights") as List<Sys_Right>;
+            return listRights;
         }
 
 

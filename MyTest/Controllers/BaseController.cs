@@ -22,7 +22,8 @@ namespace MyTest.Controllers
         public UserPermisstionsOperate userPermisstionsOperate { get; set; }
         protected override void OnAuthorization(AuthorizationContext filterContext)
         {
-            if (filterContext.HttpContext.User.Identity.Name != "")
+            //判断用户授权是否过期
+            if (filterContext.HttpContext.User.Identity.IsAuthenticated)
             {
                 FormsIdentity formsi = (FormsIdentity)filterContext.HttpContext.User.Identity;
                 CustomIdentity cusIden = new CustomIdentity(formsi);
@@ -30,7 +31,7 @@ namespace MyTest.Controllers
                 {
 
                     _loginuser = cusIden.User;
-
+                    //权限缓存
                     userPermisstionsOperate = new UserPermisstionsOperate(_loginuser.GUID);
                 }
             }
