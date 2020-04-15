@@ -12,14 +12,15 @@ using MyTest.Filters;
 namespace MyTest.Controllers
 {
     /// <summary>
-    /// 跳过授权过滤器
+    /// 
     /// </summary>
+    //跳过授权过滤器
     [AllowAnonymous]
     public class LoginController : Controller
     {
         //
         // GET: /Login/
-
+        
         public ActionResult Login()
         {
             return View(); 
@@ -37,13 +38,13 @@ namespace MyTest.Controllers
            
             if (SystemUser == null)
             {
-                json.Message = "- 用户名或密码不正确！";
+                json.Message = "用户名或密码不正确！";
                 json.Code = 1;
                 json.Result = false;
             }
             else if (SystemUser.Status == 1)
             {
-                json.Message = "- 账户已锁定，请与管理员联系！";
+                json.Message = "账户已锁定，请与管理员联系！";
                 json.Code = 1;
                 json.Result = false;
             }
@@ -83,7 +84,6 @@ namespace MyTest.Controllers
             return Content(json.ToJson());
 
         }
-
         public void FormsAuthen(Sys_UserAccount model, string UserName)
         {
             bool createPersistentCookie = false;

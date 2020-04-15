@@ -12,10 +12,34 @@ namespace MyTest.Filters
     /// </summary>
     public class LoginAuthorizeFilter : AuthorizeAttribute,IAuthorizationFilter
     {
+        //protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
+        //{
+        //    base.HandleUnauthorizedRequest(filterContext);
+        //    if (filterContext.ActionDescriptor.IsDefined(typeof(AllowAnonymousAttribute), true)
+        //     || filterContext.ActionDescriptor.ControllerDescriptor.IsDefined(typeof(AllowAnonymousAttribute), true))
+        //    {
+        //        return;
+        //    }
+        //    if (filterContext.HttpContext.User.Identity.IsAuthenticated)
+        //    {
+
+        //    }
+        //    else
+        //    {
+        //        //返回http状态码
+        //        filterContext.HttpContext.Response.StatusCode = 401;
+        //        filterContext.HttpContext.Response.End();
+        //    }
+        //}
+
+
+
+        //}
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
-             if (filterContext.ActionDescriptor.IsDefined(typeof(AllowAnonymousAttribute), true)
-              || filterContext.ActionDescriptor.ControllerDescriptor.IsDefined(typeof(AllowAnonymousAttribute), true))
+            base.OnAuthorization(filterContext);
+            if (filterContext.ActionDescriptor.IsDefined(typeof(AllowAnonymousAttribute), true)
+             || filterContext.ActionDescriptor.ControllerDescriptor.IsDefined(typeof(AllowAnonymousAttribute), true))
             {
                 return;
             }
@@ -33,7 +57,8 @@ namespace MyTest.Filters
             else
             {
                 //返回http状态码
-                filterContext.Result = new HttpStatusCodeResult((int)HttpStatusCode.InternalServerError);
+                filterContext.HttpContext.Response.StatusCode = 401;
+                filterContext.HttpContext.Response.End();
             }
         }
     }
