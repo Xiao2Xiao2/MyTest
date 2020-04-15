@@ -14,7 +14,7 @@ namespace MyTest.Controllers
     /// <summary>
     /// 跳过授权过滤器
     /// </summary>
-    //[AllowAnonymous]
+    [AllowAnonymous]
     public class LoginController : Controller
     {
         //

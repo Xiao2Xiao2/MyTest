@@ -99,20 +99,11 @@ namespace MyTest.Extensions
                     }
                 });
                 //获取模块集合 保存至缓存
-                //if (listModulesOID.Count == 0)
-                //{
-                //    listModulesOID.Add("'1'");
-                //}
                 List<Sys_Module> listModule = DapperCommand.Select<Sys_Module>(new { GUID = listModulesOID.ToArray() }, " GUID in ({0}) Deleted = 0 ").ToList(); 
                 Cache.AddCache(GUID.ToString() + "-Module", listModule, SystemExtends.CacheExpiredTime);
                 #endregion
             }
-        
-            //}
-            //catch (Exception)
-            //{
-            //    return;
-            //}
+
           
            
         }

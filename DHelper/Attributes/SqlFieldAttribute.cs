@@ -5,6 +5,9 @@ using System.Text;
 
 namespace DHelper.Attributes
 {
+    /// <summary>
+    /// Model特性
+    /// </summary>
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
     public class SqlFieldAttribute : Attribute
     {

@@ -31,26 +31,26 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Aspose.Words">
-      <HintPath>..\Lib\Aspose.Words.dll</HintPath>
+      <HintPath>..\MyTest\Lib\Aspose.Words.dll</HintPath>
     </Reference>
     <Reference Include="EPPlus">
-      <HintPath>..\Lib\EPPlus.dll</HintPath>
+      <HintPath>..\MyTest\Lib\EPPlus.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NPOI">
-      <HintPath>..\Lib\NPOI.dll</HintPath>
+      <HintPath>..\MyTest\Lib\NPOI.dll</HintPath>
     </Reference>
     <Reference Include="NPOI.OOXML">
-      <HintPath>..\Lib\NPOI.OOXML.dll</HintPath>
+      <HintPath>..\MyTest\Lib\NPOI.OOXML.dll</HintPath>
     </Reference>
     <Reference Include="NPOI.OpenXml4Net">
-      <HintPath>..\Lib\NPOI.OpenXml4Net.dll</HintPath>
+      <HintPath>..\MyTest\Lib\NPOI.OpenXml4Net.dll</HintPath>
     </Reference>
     <Reference Include="NPOI.OpenXmlFormats">
-      <HintPath>..\Lib\NPOI.OpenXmlFormats.dll</HintPath>
+      <HintPath>..\MyTest\Lib\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

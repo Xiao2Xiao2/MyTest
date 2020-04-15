@@ -4,22 +4,35 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-
+using Common;
 namespace DHelper.Common
 {
+    /// <summary>
+    /// DES加密
+    /// </summary>
     public class DESEncrypt
     {
         private static string _MyKey 
         { 
             get{
-                return "MyTest";
+                return ApplicationSettings.Get("DESKey");
             }
         }
+        /// <summary>
+        /// DES加密
+        /// </summary>
+        /// <param name="Text">加密内容</param>
+        /// <returns></returns>
         public static string Encrypt(string Text)
 		{
             return DESEncrypt.Encrypt(Text, _MyKey);
 		}
-
+        /// <summary>
+        /// DES加密
+        /// </summary>
+        /// <param name="Text">加密内容</param>
+        /// <param name="sKey">Key</param>
+        /// <returns></returns>
 		public static string Encrypt(string Text, string sKey)
 		{
 			DESCryptoServiceProvider dESCryptoServiceProvider = new DESCryptoServiceProvider();
@@ -40,12 +53,21 @@ namespace DHelper.Common
 			}
 			return stringBuilder.ToString();
 		}
-
+        /// <summary>
+        /// DES解密
+        /// </summary>
+        /// <param name="Text">解密内容</param>
+        /// <returns></returns>
 		public static string Decrypt(string Text)
 		{
             return DESEncrypt.Decrypt(Text, _MyKey);
 		}
-
+        /// <summary>
+        /// DES解密
+        /// </summary>
+        /// <param name="Text">解密内容</param>
+        /// <param name="sKey">Key</param>
+        /// <returns></returns>
 		public static string Decrypt(string Text, string sKey)
 		{
 			DESCryptoServiceProvider dESCryptoServiceProvider = new DESCryptoServiceProvider();

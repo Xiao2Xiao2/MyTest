@@ -6,6 +6,9 @@ using System.Web;
 
 namespace MyTest.Controllers
 {
+    /// <summary>
+    /// 请求返回结果
+    /// </summary>
     public class AjaxResult
     {
         /// <summary>

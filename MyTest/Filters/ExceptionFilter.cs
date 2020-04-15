@@ -8,6 +8,10 @@ namespace MyTest.Filters
 {
     public class ExceptionFilter : FilterAttribute, IExceptionFilter
     {
+        /// <summary>
+        /// 重写异常处理
+        /// </summary>
+        /// <param name="filterContext"></param>
         void IExceptionFilter.OnException(ExceptionContext filterContext)
         {
             filterContext.Controller.ViewData["ErrorMessage"] = filterContext.Exception.Message;

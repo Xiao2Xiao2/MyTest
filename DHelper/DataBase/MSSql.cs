@@ -18,7 +18,11 @@ namespace DHelper.DataBase
             : base(DataBaseType.MSSQL, AppsettingName)
         {
         }
-
+        /// <summary>
+        /// 根据参数生成新增SQL语句
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public override string InsertSqlCreate<T>()
         {
             string empty = string.Empty;
@@ -33,7 +37,12 @@ namespace DHelper.DataBase
             }
             return string.Format(text, dataFields.TableName, string.Join(",", values), string.Join(",@", values));
         }
-
+        /// <summary>
+        /// 根据参数生成新增SQL语句
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="needKey">如果为自增长</param>
+        /// <returns></returns>
         public override string InsertSqlCreate<T>(out bool needKey)
         {
             string empty = string.Empty;
@@ -49,7 +58,13 @@ namespace DHelper.DataBase
             }
             return string.Format(text, dataFields.TableName, string.Join(",", values), string.Join(",@", values));
         }
-
+        /// <summary>
+        /// 根据参数生成修改SQL语句
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="condition">条件</param>
+        /// <param name="updateFiles">参数</param>
+        /// <returns></returns>
         public override string UpdateSqlCreate<T>(string condition = "", List<ColumInfo> updateFiles = null)
         {
             Predicate<ColumInfo> predicate = null;
@@ -74,7 +89,12 @@ namespace DHelper.DataBase
             string format = " update {0} set {1} where {2} ";
             return string.Format(format, dataFields.TableName, arg, condition);
         }
-
+        /// <summary>
+        /// 根据参数生成删除SQL语句
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="condition">条件</param>
+        /// <returns></returns>
         public override string DeleteSqlCreate<T>(string condition = "")
         {
             Predicate<ColumInfo> predicate = null;
@@ -94,7 +114,14 @@ namespace DHelper.DataBase
             string format = " update {0} set Deleted = 1 where {1} ";
             return string.Format(format, dataFields.TableName, condition);
         }
-
+        /// <summary>
+        /// 根据参数生成查询语句
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="condition">条件</param>
+        /// <param name="orderby">排序</param>
+        /// <param name="size">size>0 就取前size条</param>
+        /// <returns></returns>
         public override string SelectSqlCreate<T>(string condition = "", string orderby = "", int size = 0)
         {
             string empty = string.Empty;
@@ -114,7 +141,15 @@ namespace DHelper.DataBase
             }
             return string.Format(format, dataFields.TableName, condition, orderby);
         }
-
+        /// <summary>
+        /// 分页查询
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="condition">条件</param>
+        /// <param name="orderby">排序</param>
+        /// <param name="startIndex">开始Index</param>
+        /// <param name="endIndex">结束Index</param>
+        /// <returns></returns>
         public override string SelectByPageSqlCreate<T>(string condition = "", string orderby = "", int startIndex = 0, int endIndex = 0)
         {
             Func<string, string> func = null;

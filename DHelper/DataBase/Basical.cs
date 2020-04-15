@@ -11,19 +11,30 @@ using System.Linq;
 using Common;
 namespace DHelper.DataBase
 {
+    /// <summary>
+    /// 实际Dapper操作
+    /// </summary>
     public abstract class Basical : IDapperCommand
 	{
+        /// <summary>
+        /// 连接字符串
+        /// </summary>
 		private string _connectionstring
 		{
 			get;
 			set;
 		}
-
+        /// <summary>
+        /// 数据库类型
+        /// </summary>
 		private DataBaseType _dbtype
 		{
 			get;
 			set;
 		}
+        /// <summary>
+        /// 日志启用  config配置开关
+        /// </summary>
         private bool SqlLog
         {
             get;
@@ -55,39 +66,79 @@ namespace DHelper.DataBase
 			dbConnection.Open();
 			return dbConnection;
 		}
-
+        /// <summary>
+        /// 虚方法
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
 		public virtual string InsertSqlCreate<T>() where T : class, new()
 		{
 			return "";
 		}
-
+        /// <summary>
+        /// 虚方法
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="needKey"></param>
+        /// <returns></returns>
 		public virtual string InsertSqlCreate<T>(out bool needKey) where T : class, new()
 		{
 			needKey = false;
 			return "";
 		}
-
+        /// <summary>
+        /// 虚方法
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="condition"></param>
+        /// <param name="updateFiles"></param>
+        /// <returns></returns>
 		public virtual string UpdateSqlCreate<T>(string condition = "", List<ColumInfo> updateFiles = null) where T : class, new()
 		{
 			return "";
 		}
-
+        /// <summary>
+        /// 虚方法
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="condition"></param>
+        /// <returns></returns>
 		public virtual string DeleteSqlCreate<T>(string condition = "") where T : class, new()
 		{
 			return "";
 		}
-
+        /// <summary>
+        /// 虚方法
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="condition"></param>
+        /// <param name="orderby"></param>
+        /// <param name="size"></param>
+        /// <returns></returns>
 		public virtual string SelectSqlCreate<T>(string condition = "", string orderby = "", int size = 0) where T : class, new()
 		{
 			return "";
 		}
-
+        /// <summary>
+        /// 虚方法
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="condition"></param>
+        /// <param name="orderby"></param>
+        /// <param name="startIndex"></param>
+        /// <param name="endIndex"></param>
+        /// <returns></returns>
 		public virtual string SelectByPageSqlCreate<T>(string condition = "", string orderby = "", int startIndex = 0, int endIndex = 0) where T : class, new()
 		{
 			return "";
 		}
-
-		public long Insert<T>(object entity) where T : class, new()
+        /// <summary>
+        /// 根据参数新增
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="entity">参数</param>
+        /// <returns></returns>
+        public long Insert<T>(object entity) where T : class, new()
 		{
 			long result = 0L;
 			try
@@ -108,12 +159,22 @@ namespace DHelper.DataBase
 			}
 			return result;
 		}
-
-		public long Insert<T>(T entity) where T : class, new()
+        /// <summary>
+        /// 根据参数新增
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="eneity">参数</param>
+        /// <returns></returns>
+        public long Insert<T>(T entity) where T : class, new()
 		{
 			return this.Insert<T>(entity);
 		}
-
+        /// <summary>
+        /// 根据参数List新增
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="listEntity">参数List</param>
+        /// <returns></returns>
 		public long Insert<T>(List<object> listEntity) where T : class, new()
 		{
 			long result = 0L;
@@ -128,18 +189,35 @@ namespace DHelper.DataBase
 			}
 			return result;
 		}
-
+        /// <summary>
+        /// 根据参数List新增
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="listEntity">参数List</param>
+        /// <returns></returns>
 		public long Insert<T>(List<T> listEntity) where T : class, new()
 		{
 			return this.Insert<object>(listEntity as List<object>);
 		}
-
-		public bool Update<T>(T entity) where T : class, new()
+        /// <summary>
+        /// 根据参数修改
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="entity">参数</param>
+        /// <returns></returns>
+        public bool Update<T>(T entity) where T : class, new()
 		{
 			return this.Update<T>(entity, "", null);
 		}
-
-		public bool Update<T>(object entity, string condition, List<ColumInfo> updateCols) where T : class, new()
+        /// <summary>
+        /// 根据参数修改
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="entity">参数</param>
+        /// <param name="condition">条件</param>
+        /// <param name="updateCols">字段</param>
+        /// <returns></returns>
+        public bool Update<T>(object entity, string condition, List<ColumInfo> updateCols) where T : class, new()
 		{
 			long num = 0L;
 			try
@@ -152,8 +230,16 @@ namespace DHelper.DataBase
 			}
 			return num > 0L;
 		}
-
-		public List<T> Select<T>(string condition, string orderby, object _entity, int size = 0) where T : class, new()
+        /// <summary>
+        /// 查询List
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="condition">条件</param>
+        /// <param name="orderby">排序</param>
+        /// <param name="_entity">参数</param>
+        /// <param name="size">size>0 就取前size条</param>
+        /// <returns></returns>
+        public List<T> Select<T>(string condition, string orderby, object _entity, int size = 0) where T : class, new()
 		{
 			List<T> list = new List<T>();
 			try
@@ -166,8 +252,15 @@ namespace DHelper.DataBase
 			}
 			return list ?? new List<T>();
 		}
-
-		public T SelectSingle<T>(string condition, string orderby, object _entity) where T : class, new()
+        /// <summary>
+        /// 查询Model
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="condition">条件</param>
+        /// <param name="orderby">排序</param>
+        /// <param name="_entity">参数</param>
+        /// <returns></returns>
+        public T SelectSingle<T>(string condition, string orderby, object _entity) where T : class, new()
 		{
 			List<T> list = this.Select<T>(condition, orderby, _entity, 1);
 			T result;
@@ -181,8 +274,17 @@ namespace DHelper.DataBase
 			}
 			return result;
 		}
-
-		public List<T> SelectByPage<T>(string condition, string orderby, object _entity, int startIndex, int endIndex) where T : class, new()
+        /// <summary>
+        /// 分页查询List
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="condition">条件</param>
+        /// <param name="orderby">排序</param>
+        /// <param name="_entity">参数</param>
+        /// <param name="startIndex">开始Index</param>
+        /// <param name="endIndex">结束Index</param>
+        /// <returns></returns>
+        public List<T> SelectByPage<T>(string condition, string orderby, object _entity, int startIndex, int endIndex) where T : class, new()
 		{
 			List<T> list = new List<T>();
 			try
@@ -195,8 +297,14 @@ namespace DHelper.DataBase
 			}
 			return list ?? new List<T>();
 		}
-
-		public T GetEntityBySql<T>(string strSql, object _entity = null)
+        /// <summary>
+        /// 根据SQL语句查询Model
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="strSql">sql语句</param>
+        /// <param name="_entity">参数</param>
+        /// <returns></returns>
+        public T GetEntityBySql<T>(string strSql, object _entity = null)
 		{
 			T result = default(T);
 			try
@@ -208,7 +316,13 @@ namespace DHelper.DataBase
 			}
 			return result;
 		}
-
+        /// <summary>
+        /// 根据SQL语句查询List
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="strSql">sql语句</param>
+        /// <param name="_entity">参数</param>
+        /// <returns></returns>
 		public List<T> GetEntityListBySql<T>(string strSql, object _entity = null)
 		{
 			List<T> result = new List<T>();
@@ -221,8 +335,13 @@ namespace DHelper.DataBase
 			}
 			return result;
 		}
-
-		public long ExcuteBySql(string strSql, object _entity = null)
+        /// <summary>
+        /// 调用SQL语句
+        /// </summary>
+        /// <param name="strSql">sql语句</param>
+        /// <param name="_entity">参数</param>
+        /// <returns></returns>
+        public long ExcuteBySql(string strSql, object _entity = null)
 		{
 			long result = 0L;
 			try
@@ -234,12 +353,23 @@ namespace DHelper.DataBase
 			}
 			return result;
 		}
-
+        /// <summary>
+        /// 根据参数删除
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="entity">参数</param>
+        /// <returns></returns>
 		public bool Delete<T>(T entity) where T : class, new()
 		{
 			return this.Delete<T>(entity, "");
 		}
-
+        /// <summary>
+        /// 根据参数删除
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="entity">参数</param>
+        /// <param name="condition">条件</param>
+        /// <returns></returns>
 		public bool Delete<T>(object entity, string condition) where T : class, new()
 		{
 			long num = 0L;
@@ -253,6 +383,13 @@ namespace DHelper.DataBase
 			}
 			return num > 0L;
 		}
+        /// <summary>
+        /// 执行查询
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="strSql">sql语句</param>
+        /// <param name="_entity">参数</param>
+        /// <returns></returns>
         private IEnumerable<T> CommandQuery<T>(string strSql,object _entity)
         {
             IEnumerable<T> result = null;
@@ -284,6 +421,12 @@ namespace DHelper.DataBase
             LogWrite(strSql, msg, _entity);
             return result;
         }
+        /// <summary>
+        /// 执行操作
+        /// </summary>
+        /// <param name="strSql">sql语句</param>
+        /// <param name="_entity">参数</param>
+        /// <returns></returns>
         private long CommandExecute(string strSql, object _entity)
         {
             long result = 0L;
@@ -315,8 +458,15 @@ namespace DHelper.DataBase
             LogWrite(strSql, msg, _entity);
             return result;
         }
+        /// <summary>
+        /// 输出日志
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="msg"></param>
+        /// <param name="_entity"></param>
         private void LogWrite(string sql,string msg,object _entity)
         {
+            //SQLLog is true
             if (this.SqlLog)
             {
                 string text = " sql： {0} \r\n msg：{1} \r\n entity： {2}";
