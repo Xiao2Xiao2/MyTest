@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>登录已失效</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="~/Content/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="~/Content//layuiadmin/style/admin.css" media="all">
+</head>
+<body>
+
+
+    <div class="layui-fluid">
+        <div class="layadmin-tips">
+            <i class="layui-icon" face>&#xe664;</i>
+
+            <div class="layui-text" style="font-size: 20px;">
+                登录已失效！
+            </div>
+
+        </div>
+    </div>
+
+
+    <script src="~/Content/layuiadmin/layui/layui.js"></script>
+    <script>
+  layui.config({
+      base: '../Content/layuiadmin/' //静态资源所在路径
+  }).extend({
+      index: 'lib/index' //主入口模块
+  }).use(['index'], function () {
+      layer.msg("登录已失效！即将跳转到登录界面！", {
+          icon: 6,
+          time: 2000,
+      }, function () {
+              parent.window.location.href = "/Login/Login"
+      });
+  });
+       
+    </script>
+</body>
+</html>

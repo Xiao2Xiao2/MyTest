@@ -1049,7 +1049,7 @@ namespace System
 
         #region 文本日志
         private static object logObj = new object();
-        public static void LogWrite(string logs,string dir = "default")
+        public static void LogWrite(string logs,string dir = "Default")
         {
             string path = System.AppDomain.CurrentDomain.BaseDirectory + "\\APP_LOG\\{0}\\".format(dir);
             System.Threading.ThreadPool.QueueUserWorkItem((obj) =>

@@ -8,14 +8,23 @@ namespace MyTest.Filters
 {
     public class LogFilters : FilterAttribute, IActionFilter
     {
+        private bool HttpLogEnabled
+        {
+            get {
+                return ApplicationSettings.Get("HttpLogEnabled") == "true";
+            }
+        }
         /// <summary>
         /// 请求执行前
         /// </summary>
         /// <param name="filterContext"></param>
         void IActionFilter.OnActionExecuting(ActionExecutingContext filterContext)
         {
-            SystemExtends.LogWrite("IP:{0}-Controller:{1}-Action:{2}".format(Text.UserIp, filterContext.ActionDescriptor.ControllerDescriptor.ControllerName, filterContext.ActionDescriptor.ActionName));
-            //filterContext.Controller.ViewData["ExecutingLogger"] = "正要添加公告，已以写入日志！时间：" + DateTime.Now;
+            if (HttpLogEnabled)
+            {
+                SystemExtends.LogWrite("IP:{0}-Controller:{1}-Action:{2}"
+               .format(Text.NetworkIp, filterContext.ActionDescriptor.ControllerDescriptor.ControllerName, filterContext.ActionDescriptor.ActionName), "HttpLog");
+            }
         }
         /// <summary>
         /// 请求执行后
@@ -23,7 +32,6 @@ namespace MyTest.Filters
         /// <param name="filterContext"></param>
         void IActionFilter.OnActionExecuted(ActionExecutedContext filterContext)
         {
-            //filterContext.Controller.ViewData["ExecutedLogger"] = "公告添加完成，已以写入日志！时间：" + DateTime.Now;
         }
 
     }

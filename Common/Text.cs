@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.NetworkInformation;
+using System.Net.Sockets;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -1102,6 +1104,28 @@ namespace Common
                     return "Unknown";
                 }
                 return ip;
+            }
+        }
+
+        #endregion
+        #region 获取网络IP
+        /// <summary>
+        /// 获取网络IP
+        /// </summary>
+        public static string NetworkIp
+        {
+            get
+            {
+
+                string AddressIP = string.Empty;
+                foreach (IPAddress _IPAddress in Dns.GetHostEntry(Dns.GetHostName()).AddressList)
+                {
+                    if (_IPAddress.AddressFamily.ToString() == "InterNetwork")
+                    {
+                        AddressIP = _IPAddress.ToString();
+                    }
+                }
+                return AddressIP;
             }
         }
 

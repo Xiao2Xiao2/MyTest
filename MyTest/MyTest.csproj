@@ -135,6 +135,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Extensions\Enums.cs" />
@@ -418,6 +419,10 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Home\Default.cshtml" />
+    <Content Include="Views\Home\WorkTable.cshtml" />
+    <Content Include="Views\Error\Http401.cshtml" />
+    <Content Include="Views\Error\Http500.cshtml" />
+    <Content Include="Views\Error\Http403.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

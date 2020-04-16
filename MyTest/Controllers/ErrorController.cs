@@ -6,17 +6,20 @@ using System.Web.Mvc;
 
 namespace MyTest.Controllers
 {
-    public class HomeController : BaseController
+    public class ErrorController : Controller
     {
         //
-        // GET: /Home/
-        [AllowAnonymous]
-        public ActionResult Default()
+        // GET: /Error/
+
+        public ActionResult Http401()
         {
             return View();
         }
-        [AllowAnonymous]
-        public ActionResult WorkTable()
+        public ActionResult Http403()
+        {
+            return View();
+        }
+        public ActionResult Http500()
         {
             return View();
         }

@@ -39,27 +39,59 @@ namespace MyTest.Filters
         {
             base.OnAuthorization(filterContext);
             if (filterContext.ActionDescriptor.IsDefined(typeof(AllowAnonymousAttribute), true)
-             || filterContext.ActionDescriptor.ControllerDescriptor.IsDefined(typeof(AllowAnonymousAttribute), true))
+          || filterContext.ActionDescriptor.ControllerDescriptor.IsDefined(typeof(AllowAnonymousAttribute), true))
             {
                 return;
             }
-            if (filterContext.HttpContext.User.Identity.IsAuthenticated)
-            {
-                //FormsIdentity formsi = (FormsIdentity)filterContext.HttpContext.User.Identity;
-                //CustomIdentity cusIden = new CustomIdentity(formsi);
-                //if (cusIden != null)
-                //{
-
-                //    _loginuser = cusIden.User;
-
-                //}
-            }
-            else
+            if (!filterContext.HttpContext.User.Identity.IsAuthenticated)
             {
                 //返回http状态码
                 filterContext.HttpContext.Response.StatusCode = 401;
                 filterContext.HttpContext.Response.End();
             }
         }
+        //public override void OnAuthorization(AuthorizationContext filterContext)
+        //{
+        //    base.OnAuthorization(filterContext);
+
+        //    if (filterContext.ActionDescriptor.ControllerDescriptor.ControllerName == "Error")
+        //    {
+        //        return;
+        //    }
+        //    if (filterContext.ActionDescriptor.ControllerDescriptor.ControllerName=="Home"&& filterContext.ActionDescriptor.ActionName =="Default")
+        //    {
+        //        return;
+        //    }
+        //    if (!filterContext.HttpContext.User.Identity.IsAuthenticated)
+        //    {
+
+        //        if (filterContext.ActionDescriptor.IsDefined(typeof(AllowAnonymousAttribute), true)
+        //    || filterContext.ActionDescriptor.ControllerDescriptor.IsDefined(typeof(AllowAnonymousAttribute), true))
+        //        {
+        //            if (filterContext.ActionDescriptor.ControllerDescriptor.ControllerName != "Login")
+        //            {
+        //                ViewResult vr = new ViewResult();
+        //                vr.ViewName = "/Views/Error/Http401.cshtml";
+        //                //vr.ViewName = "/Views/Shared/ToLogin.cshtml";
+        //                filterContext.Result = vr;
+        //                //filterContext.Result = new RedirectResult("/Error/Http401");
+        //                //filterContext.HttpContext.Response.Write("<script>location.href = '/Error/Http401';</script>");
+        //                //filterContext.HttpContext.Response.End();
+        //            }
+        //            else
+        //            {
+        //                return;
+        //            }
+
+        //        }
+        //        else
+        //        {
+        //            //返回http状态码
+        //            filterContext.HttpContext.Response.StatusCode = 401;
+        //            filterContext.HttpContext.Response.End();
+        //        }
+
+        //    }
+        //}
     }
 }

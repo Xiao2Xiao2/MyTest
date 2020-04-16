@@ -14,13 +14,13 @@ namespace MyTest.Filters
         /// <param name="filterContext"></param>
         void IExceptionFilter.OnException(ExceptionContext filterContext)
         {
-            filterContext.Controller.ViewData["ErrorMessage"] = filterContext.Exception.Message;
-            filterContext.Result = new ViewResult()
-            {
-                ViewName = "Error",
-                ViewData = filterContext.Controller.ViewData,
-            };
-            filterContext.ExceptionHandled = true;
+            //filterContext.Controller.ViewData["ErrorMessage"] = filterContext.Exception.Message;
+            //filterContext.Result = new ViewResult()
+            //{
+            //    ViewName = "Error",
+            //    ViewData = filterContext.Controller.ViewData,
+            //};
+            //filterContext.ExceptionHandled = true;
         }
     }
 }

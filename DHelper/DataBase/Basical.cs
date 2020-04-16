@@ -35,10 +35,11 @@ namespace DHelper.DataBase
         /// <summary>
         /// 日志启用  config配置开关
         /// </summary>
-        private bool SqlLog
+        private bool SqlLogEnabled
         {
-            get;
-            set;
+            get {
+                return ApplicationSettings.Get("SqlLogEnabled") == "true";
+            }
         }
 
 		public Basical(DataBaseType databasetype, string AppsettingName = "")
@@ -52,7 +53,6 @@ namespace DHelper.DataBase
 			{
 				this._connectionstring = PubConstant.GetConnectionString(AppsettingName);
 			}
-            this.SqlLog = ApplicationSettings.Get("SqlLog") == "true";
 		}
 
 		private IDbConnection GetDbSession()
@@ -467,7 +467,7 @@ namespace DHelper.DataBase
         private void LogWrite(string sql,string msg,object _entity)
         {
             //SQLLog is true
-            if (this.SqlLog)
+            if (this.SqlLogEnabled)
             {
                 string text = " sql： {0} \r\n msg：{1} \r\n entity： {2}";
                 try
